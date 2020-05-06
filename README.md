@@ -1,2 +1,2 @@
 # GryKomputerowe
-nice project with two girls
+-university project
