@@ -30,6 +30,8 @@ public class ClickedManager : MonoBehaviour
                     if (counter == 3 && input_order.SequenceEqual(correct_order))
                     {
                         Debug.Log("You won!");
+                        counter = 0;
+                        input_order = new int[] {0, 0, 0};
                     }
                     else if (counter == 3 && !input_order.SequenceEqual(correct_order))
                     {
