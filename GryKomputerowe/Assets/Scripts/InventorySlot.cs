@@ -7,6 +7,7 @@ public class InventorySlot : MonoBehaviour
 {
     Item item;
     public Image icon;
+    public Button useButton;
 
     public void AddItem (Item newItem)
     {
@@ -19,5 +20,14 @@ public class InventorySlot : MonoBehaviour
         item = null;
         icon.sprite = null;
         icon.enabled = false;
+    }
+
+    public void OnUseButton()
+    {
+        if(item != null)
+        {
+            item.Use();
+            Debug.Log("click");  
+        }
     }
 }
