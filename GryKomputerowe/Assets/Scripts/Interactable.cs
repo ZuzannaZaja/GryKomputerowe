@@ -19,7 +19,7 @@ public class Interactable : MonoBehaviour
     void PickUp()
     {
         Debug.Log("Picking up " + item.name);
-        Inventory.instance.Add(item);
         Destroy(gameObject);
+        Inventory.instance.Add(item);
     }
 }

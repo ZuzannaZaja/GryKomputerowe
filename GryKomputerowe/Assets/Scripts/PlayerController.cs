@@ -47,15 +47,19 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0) && lastViewed != null)
         {
-            if(!lastViewed.isSelected && hit.collider.GetComponent<Viewable>() != null)
+            float distance = Vector3.Distance(transform.position, lastViewed.transform.position);
+            if(distance <= 3f)
             {
-                lastViewed.Select(); 
-                rotateView.isFocused = true;
-            } else
-            {
-                lastViewed.Deselect();
-                rotateView.isFocused = false;
-                lastViewed = null;               
+                if(!lastViewed.isSelected && hit.collider.GetComponent<Viewable>() != null)
+                {
+                    lastViewed.Select(); 
+                    rotateView.isFocused = true;
+                } else
+                {
+                    lastViewed.Deselect();
+                    rotateView.isFocused = false;
+                    lastViewed = null;               
+                }
             }
         }
 

@@ -8,6 +8,7 @@ public class Viewable : MonoBehaviour
     public Quaternion startingRotation;
     public bool isSelected = false;
     public float onSelectY;
+    public Transform player;
   
     public void Select()
     {
