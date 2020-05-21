@@ -32,6 +32,8 @@ public class Chest : MonoBehaviour
                         {
                             chestOpened.SetActive(true);
                             gameObject.SetActive(false);
+                            inventory.Remove(item);
+                            break;
                         }
                     }
                 }
