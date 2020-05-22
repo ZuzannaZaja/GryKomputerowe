@@ -7,13 +7,18 @@ public class Viewable : MonoBehaviour
     public Vector3 startingPosition;
     public Quaternion startingRotation;
     public bool isSelected = false;
-    public float onSelectY;
+    Renderer rend;
+
+    void Start()
+    {
+        rend = GetComponent<Renderer>();
+    }
   
     public void Select()
     {
         startingPosition = transform.position;
         startingRotation = transform.rotation;
-        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, Screen.height/2 - transform.localScale.y/2, Camera.main.nearClipPlane + 0.5f));
+        transform.position += Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane + 0.5f))-rend.bounds.center;
         isSelected = true;
     }
 
