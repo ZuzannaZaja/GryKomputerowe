@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     public Camera camera;
     private Viewable lastViewed;
     private RotateView rotateView;
+    public float gravity = -9.81f;
+    Vector3 velocity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,9 @@ public class PlayerController : MonoBehaviour
 
             Vector3 move = transform.right * x + transform.forward * z;
             characterController.Move(move * speed * Time.deltaTime);
+            velocity.y += gravity * Time.deltaTime;
+            characterController.Move(velocity * Time.deltaTime);
+            
         }
 
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
