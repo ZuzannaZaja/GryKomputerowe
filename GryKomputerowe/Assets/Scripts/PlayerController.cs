@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Camera camera;
     private Viewable lastViewed;
     private RotateView rotateView;
-    public float gravity = -9.81f;
+    public float gravity = -9.81f; 
     Vector3 velocity;
 
     // Start is called before the first frame update
