@@ -8,6 +8,7 @@ public class RotateView : MonoBehaviour
     public Transform playerBody;
     float xRotation = 0f;
     public bool isFocused;
+    public bool isScrollOpened;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class RotateView : MonoBehaviour
     void Update()
     {
 
-        if(!isFocused)
+        if(!isFocused && !isScrollOpened)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

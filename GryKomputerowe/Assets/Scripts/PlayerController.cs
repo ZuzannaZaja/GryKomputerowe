@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(rotateView.isFocused)
+        if(rotateView.isFocused && !rotateView.isScrollOpened)
         {
             float mouseX = Input.GetAxis("Mouse X") * 700f * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * 700f * Time.deltaTime;
