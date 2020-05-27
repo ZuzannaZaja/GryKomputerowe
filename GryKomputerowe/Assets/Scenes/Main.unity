@@ -5378,6 +5378,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 15440432}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &466878960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1359375955376506586, guid: d6ade90f396755c42b43f8006323ec2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1958690985}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &466878961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466878960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3054572640270b40a59e745e6ffbc20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 218031106}
+  potion: {fileID: 11400000, guid: c57261555073cae49bd7c359747d294c, type: 2}
 --- !u!1001 &466921982
 PrefabInstance:
   m_ObjectHideFlags: 0
