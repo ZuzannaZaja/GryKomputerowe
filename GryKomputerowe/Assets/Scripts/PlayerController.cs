@@ -23,10 +23,9 @@ public class PlayerController : MonoBehaviour
         inventory = Inventory.instance;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        if(!rotateView.isFocused)
+        if (!rotateView.isFocused)
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
@@ -35,9 +34,12 @@ public class PlayerController : MonoBehaviour
             characterController.Move(move * speed * Time.deltaTime);
             velocity.y += gravity * Time.deltaTime;
             characterController.Move(velocity * Time.deltaTime);
-            
-        }
 
+        }
+    }
+    // Update is called once per frame
+    void Update()
+    {
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, 100))

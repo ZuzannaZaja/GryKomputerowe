@@ -16,7 +16,7 @@ public class RotateView : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if(!isFocused && !isScrollOpened)
