@@ -13,12 +13,14 @@ public class PlayerController : MonoBehaviour
     public float gravity = -9.81f; 
     Vector3 velocity;
     public GameObject[] letters;
+    Inventory inventory;
 
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         rotateView = GetComponentInChildren<RotateView>();
+        inventory = Inventory.instance;
     }
 
     // Update is called once per frame
@@ -79,10 +81,19 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-            foreach (GameObject letter in letters)
+            foreach (Item item in inventory.items)
             {
-                letter.SetActive(true);
+                if(item.name.Equals("Potion"))
+                {
+                    foreach (GameObject letter in letters)
+                    {
+                        letter.SetActive(true);
+                    }
+                    inventory.Remove(item);
+                    break;
+                }
             }
+
         }
     }
 

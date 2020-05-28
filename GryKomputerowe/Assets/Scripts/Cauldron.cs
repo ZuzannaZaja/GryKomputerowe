@@ -8,6 +8,8 @@ public class Cauldron : MonoBehaviour
     public Transform player;
     private int ingredients;
     public Item potion;
+    public GameObject textUI;    
+    public float timeStart = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,9 +61,22 @@ public class Cauldron : MonoBehaviour
                             inventory.Remove(inventory.items[0]);
                         }
                         inventory.Add(potion);
+                        ActivateText();
                     }
                 }
             }
         }
+        if (textUI.activeSelf)
+        {
+            timeStart -= Time.deltaTime;
+            if (timeStart <= 0)
+            {
+                textUI.SetActive(false);
+            }
+        }
+    }
+    public void ActivateText()
+    {
+        textUI.SetActive(true);
     }
 }
