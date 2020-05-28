@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private RotateView rotateView;
     public float gravity = -9.81f; 
     Vector3 velocity;
+    public GameObject[] letters;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +75,14 @@ public class PlayerController : MonoBehaviour
             float mouseX = Input.GetAxis("Mouse X") * 700f * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * 700f * Time.deltaTime;
             lastViewed.transform.Rotate(new Vector3(0, 0, mouseX));
+        }
+        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            foreach (GameObject letter in letters)
+            {
+                letter.SetActive(true);
+            }
         }
     }
 

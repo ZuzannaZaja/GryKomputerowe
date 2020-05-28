@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ClickedManager : MonoBehaviour
 {
-    public int[] correct_order = {1, 2, 3};
-    public int[] input_order = {0, 0, 0};
+    public int[] correct_order = {1, 2, 3, 4, 5};
+    public int[] input_order = {0, 0, 0, 0, 0};
     public Camera camera;
 
     private int counter = 0; 
@@ -27,16 +27,16 @@ public class ClickedManager : MonoBehaviour
                     counter++;
                     input_order[counter - 1] = clickable.order;
 
-                    if (counter == 3 && input_order.SequenceEqual(correct_order))
+                    if (counter == 5 && input_order.SequenceEqual(correct_order))
                     {
                         Debug.Log("You won!");
                         counter = 0;
-                        input_order = new int[] {0, 0, 0};
+                        input_order = new int[] {0, 0, 0, 0, 0};
                     }
-                    else if (counter == 3 && !input_order.SequenceEqual(correct_order))
+                    else if (counter == 5 && !input_order.SequenceEqual(correct_order))
                     {
                         counter = 0;
-                        input_order = new int[] {0, 0, 0};
+                        input_order = new int[] {0, 0, 0, 0, 0};
                     }
                 }
             }
