@@ -61,6 +61,7 @@ public class Cauldron : MonoBehaviour
                         }
                         inventory.Add(potion);
                         ActivateText();
+                        ingredients = 0;
                     }
                 }
             }
