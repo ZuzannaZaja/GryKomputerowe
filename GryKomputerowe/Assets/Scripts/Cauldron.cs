@@ -55,7 +55,6 @@ public class Cauldron : MonoBehaviour
                     }
                     if(ingredients == 5)
                     {
-                        Debug.Log("wszystko");
                         for(int i = 0; i < 5; i++)
                         {
                             inventory.Remove(inventory.items[0]);

@@ -27,14 +27,12 @@ public class Clickable : MonoBehaviour
         float distance = Vector3.Distance(player.position, transform.position);
         if (distance <= radius)
         {
-            Debug.Log("Clicked");
             Click();
         }
     }
 
     public void Click()
     {
-        Debug.Log(order);
         //TODO: can be changing material when clicked or sth
     }
 

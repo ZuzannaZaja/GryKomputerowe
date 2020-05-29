@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     public float speed = 5f;
     private Vector3 moveDirection = Vector3.zero;
-    public Camera camera;
     private Viewable lastViewed;
     private RotateView rotateView;
     public float gravity = -9.81f; 
@@ -40,7 +39,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, 100))
         {
