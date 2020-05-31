@@ -10,6 +10,8 @@ public class Cauldron : MonoBehaviour
     public Item potion;
     public GameObject textUI;    
     public float timeStart = 5;
+    public GameObject chestOpened;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,47 +23,49 @@ public class Cauldron : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(player.position, transform.position);
-
-        if (distance <= 3f)
+        if(inventory.items.Count == 5 && chestOpened.activeSelf)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
+            if (distance <= 3f)
             {
-                if (hit.collider.GetComponent<Cauldron>() != null && Input.GetMouseButtonDown(0) && distance <= 3f)
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    foreach (Item item in inventory.items)
+                    if (hit.collider.GetComponent<Cauldron>() != null && Input.GetMouseButtonDown(0) && distance <= 3f)
                     {
-                        if (item.name.Equals("Olive Oil"))
+                        foreach (Item item in inventory.items)
                         {
-                            ingredients += 1;
+                            if (item.name.Equals("Olive Oil"))
+                            {
+                                ingredients += 1;
+                            }
+                            if (item.name.Equals("Beat"))
+                            {
+                                ingredients += 1;
+                            }
+                            if (item.name.Equals("Feather"))
+                            {
+                                ingredients += 1;
+                            }
+                            if (item.name.Equals("Flask"))
+                            {
+                                ingredients += 1;
+                            }
+                            if (item.name.Equals("Ivy"))
+                            {
+                                ingredients += 1;
+                            }
                         }
-                        if (item.name.Equals("Beat"))
+                        if (ingredients == 5)
                         {
-                            ingredients += 1;
+                            for (int i = 0; i < 5; i++)
+                            {
+                                inventory.Remove(inventory.items[0]);
+                            }
+                            inventory.Add(potion);
+                            ActivateText();
+                            ingredients = 0;
                         }
-                        if (item.name.Equals("Feather"))
-                        {
-                            ingredients += 1;
-                        }
-                        if (item.name.Equals("Flask"))
-                        {
-                            ingredients += 1;
-                        }
-                        if (item.name.Equals("Ivy"))
-                        {
-                            ingredients += 1;
-                        }
-                    }
-                    if(ingredients == 5)
-                    {
-                        for(int i = 0; i < 5; i++)
-                        {
-                            inventory.Remove(inventory.items[0]);
-                        }
-                        inventory.Add(potion);
-                        ActivateText();
-                        ingredients = 0;
                     }
                 }
             }

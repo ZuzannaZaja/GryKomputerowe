@@ -10,9 +10,11 @@ public class ClickedManager : MonoBehaviour
     //public GameObject doorLeft;
     //public GameObject doorRight;
     public GameObject door;
+    public PlayerController player;
 
     private int counter = 0;
     // Update is called once per frame
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -31,6 +33,12 @@ public class ClickedManager : MonoBehaviour
 
                     if (counter == 5 && input_order.SequenceEqual(correct_order))
                     {
+                        player.letters[6].GetComponent<MeshRenderer>().material.color = Color.green;
+                        player.letters[0].GetComponent<MeshRenderer>().material.color = Color.green;
+                        player.letters[7].GetComponent<MeshRenderer>().material.color = Color.green;
+                        player.letters[10].GetComponent<MeshRenderer>().material.color = Color.green;
+                        player.letters[5].GetComponent<MeshRenderer>().material.color = Color.green;
+
                         //doorLeft.transform.localEulerAngles = new Vector3(doorLeft.transform.localEulerAngles.x, doorLeft.transform.localEulerAngles.y + 90f, doorLeft.transform.localEulerAngles.z);
                         //doorRight.transform.localEulerAngles = new Vector3(doorRight.transform.localEulerAngles.x, doorRight.transform.localEulerAngles.y - 90f, doorRight.transform.localEulerAngles.z);
                         door.transform.localEulerAngles = new Vector3(door.transform.localEulerAngles.x, door.transform.localEulerAngles.y + 90f, door.transform.localEulerAngles.z);
@@ -41,6 +49,10 @@ public class ClickedManager : MonoBehaviour
                     {
                         counter = 0;
                         input_order = new int[] { 0, 0, 0, 0, 0 };
+                        for (int i = 0; i < 12; i++)
+                        {
+                            player.letters[i].GetComponent<MeshRenderer>().material.color = Color.white;
+                        }
                     }
                 }
             }

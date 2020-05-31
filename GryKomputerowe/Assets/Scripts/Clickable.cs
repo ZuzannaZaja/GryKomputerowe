@@ -2,15 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Clickable : MonoBehaviour
 {
     public int order;
-    public float radius = 3f;
+    public float radius = 4f;
     public Transform player;
     
     private ClickedManager _clickedManager;
+    public GameObject letter;
 
     private void Start()
     {
@@ -33,7 +35,7 @@ public class Clickable : MonoBehaviour
 
     public void Click()
     {
-        //TODO: can be changing material when clicked or sth
+        letter.GetComponent<MeshRenderer>().material.color = Color.yellow;
     }
 
 }

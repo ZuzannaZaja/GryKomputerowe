@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class PlayerController : MonoBehaviour
     Vector3 velocity;
     public GameObject[] letters;
     Inventory inventory;
+    public GameObject dotCursor;
+    public GameObject handCursor;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +50,33 @@ public class PlayerController : MonoBehaviour
             Viewable viewable = hit.collider.GetComponent<Viewable>();
             Interactable interactable = hit.collider.GetComponent<Interactable>();
 
-            if(viewable != null){
+            if(viewable != null)
+            {
+                float distanceViewable = Vector3.Distance(transform.position, viewable.transform.position);
+                if(distanceViewable <= 3f)
+                {
+                    dotCursor.SetActive(false);
+                    handCursor.SetActive(true);
+                }
+            }
+
+            if (interactable != null)
+            {
+                float distanceInteractable = Vector3.Distance(transform.position, interactable.transform.position);
+                if (distanceInteractable <= interactable.radius)
+                {
+                    dotCursor.SetActive(false);
+                    handCursor.SetActive(true);
+                }
+            }
+
+            if (viewable == null && interactable == null)
+            {
+                handCursor.SetActive(false);
+                dotCursor.SetActive(true);
+            }
+
+            if (Input.GetMouseButtonDown(0) && viewable != null){
                 lastViewed = viewable;
             }
 

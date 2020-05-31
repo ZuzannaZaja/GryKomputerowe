@@ -6,6 +6,8 @@ public class ScrollOpen : MonoBehaviour
 {
     public GameObject scrollOpened;
     public Transform player;
+    public GameObject dotCursor;
+    public GameObject handCursor;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +25,14 @@ public class ScrollOpen : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.GetComponent<ScrollOpen>() != null && Input.GetMouseButtonDown(0))
+                if (hit.collider.GetComponent<ScrollOpen>() != null)
                 {
-                    if (distance <= 3f)
+                    dotCursor.SetActive(false);
+                    handCursor.SetActive(true);
+                    if (Input.GetMouseButtonDown(0))
                     {
                         scrollOpened.SetActive(true);
+
                     }
                 }
             }

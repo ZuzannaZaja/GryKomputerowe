@@ -9,7 +9,6 @@ public class Scroll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
         rend = GetComponent<Renderer>();
         rotateView = Camera.main.GetComponent<RotateView>();
     }

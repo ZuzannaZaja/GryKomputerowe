@@ -6,12 +6,17 @@ public class Viewable : MonoBehaviour
 {
     public Vector3 startingPosition;
     public Quaternion startingRotation;
+    public Vector3 localScaleHint;
     public bool isSelected = false;
+    public bool isHint = false;
     Renderer rend;
+    private RotateView rotateView;
+    public float hintScale;
 
     void Start()
     {
         rend = GetComponent<Renderer>();
+        rotateView = Camera.main.GetComponent<RotateView>();
     }
   
     public void Select()
@@ -20,6 +25,13 @@ public class Viewable : MonoBehaviour
         startingRotation = transform.rotation;
         transform.position += Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane + 0.5f))-rend.bounds.center;
         isSelected = true;
+        if(isHint)
+        {
+            localScaleHint = transform.localScale;
+            transform.localScale *= hintScale;
+            transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
+            rotateView.isScrollOpened = true;
+        }
     }
 
     public void Deselect()
@@ -27,6 +39,11 @@ public class Viewable : MonoBehaviour
         transform.position = startingPosition;
         transform.rotation = startingRotation;
         isSelected = false;
+        if (isHint)
+        {
+            transform.localScale = localScaleHint;
+            rotateView.isScrollOpened = false;
+        }
     }
 
 }
