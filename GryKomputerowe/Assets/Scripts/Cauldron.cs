@@ -23,8 +23,20 @@ public class Cauldron : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (chestOpened.activeSelf)
+        {
+            IfChestOpened();
+        }
+    }
+    public void ActivateText()
+    {
+        textUI.SetActive(true);
+    }
+
+    public void IfChestOpened()
+    {
         float distance = Vector3.Distance(player.position, transform.position);
-        if(inventory.items.Count == 5 && chestOpened.activeSelf)
+        if(inventory.items.Count == 5)
         {
             if (distance <= 3f)
             {
@@ -71,7 +83,7 @@ public class Cauldron : MonoBehaviour
                 }
             }
         }
-        else if (chestOpened.activeSelf)
+        else
         {
             if (distance <= 3f)
             {
@@ -105,9 +117,5 @@ public class Cauldron : MonoBehaviour
                 timeStart = 5;
             }
         }
-    }
-    public void ActivateText()
-    {
-        textUI.SetActive(true);
     }
 }
