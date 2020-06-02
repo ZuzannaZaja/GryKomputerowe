@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public GameObject dotCursor;
     public GameObject handCursor;
     public GameObject textReset;
+    public GameObject textDrink;
+    public GameObject bag;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +53,13 @@ public class PlayerController : MonoBehaviour
             Viewable viewable = hit.collider.GetComponent<Viewable>();
             Interactable interactable = hit.collider.GetComponent<Interactable>();
 
-            if(viewable != null)
+            if (bag.GetComponent<Bag>().isHit)
+            {
+                dotCursor.SetActive(false);
+                handCursor.SetActive(true);
+            }
+
+            if (viewable != null)
             {
                 float distanceViewable = Vector3.Distance(transform.position, viewable.transform.position);
                 if(distanceViewable <= 3f)
@@ -71,7 +79,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (viewable == null && interactable == null)
+            if (viewable == null && interactable == null && !bag.GetComponent<Bag>().isHit)
             {
                 handCursor.SetActive(false);
                 dotCursor.SetActive(true);
@@ -124,6 +132,7 @@ public class PlayerController : MonoBehaviour
                         letter.SetActive(true);
                     }
                     inventory.Remove(item);
+                    textDrink.SetActive(false);
                     textReset.SetActive(true);
                     break;
                 }

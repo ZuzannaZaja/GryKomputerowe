@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScrollOpen : MonoBehaviour
+public class OutsideDoor : MonoBehaviour
 {
-    public GameObject scrollOpened;
     public Transform player;
-    public GameObject dotCursor;
-    public GameObject handCursor;
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -25,17 +22,11 @@ public class ScrollOpen : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.GetComponent<ScrollOpen>() != null)
+                if (hit.collider.GetComponent<OutsideDoor>() != null && Input.GetMouseButtonDown(0))
                 {
-                    dotCursor.SetActive(false);
-                    handCursor.SetActive(true);
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        scrollOpened.SetActive(true);
-                    }
+                    transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + 90f, transform.localEulerAngles.z);
                 }
             }
         }
     }
 }
-

@@ -85,6 +85,7 @@ public class Lock : MonoBehaviour
                     rotateView.isScrollOpened = false;
                     isViewed = false;
                     Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
                     if (!wasCorrect)
                     {
                         Reset();
@@ -101,7 +102,9 @@ public class Lock : MonoBehaviour
                         startingLocalScale = transform.localScale;
                         startingPosition = transform.position;
                         startingRotation = transform.rotation;
-                        transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up); Cursor.lockState = CursorLockMode.None;
+                        transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up); 
+                        Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true;
                         transform.position += Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane + 0.5f)) - rend.bounds.center;
                         transform.localScale *= 4f;
                         rotateView.isScrollOpened = true;
