@@ -8,7 +8,8 @@ public class Cauldron : MonoBehaviour
     public Transform player;
     private int ingredients;
     public Item potion;
-    public GameObject textUI;    
+    public GameObject textUI;
+    public GameObject textUIComeBack;
     public float timeStart = 5;
     public GameObject chestOpened;
 
@@ -70,12 +71,38 @@ public class Cauldron : MonoBehaviour
                 }
             }
         }
+        else if (chestOpened.activeSelf)
+        {
+            if (distance <= 3f)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100))
+                {
+                    if (hit.collider.GetComponent<Cauldron>() != null && Input.GetMouseButtonDown(0) && distance <= 3f)
+                    {
+                        textUIComeBack.SetActive(true);
+                    }
+                }
+            }
+        }
+        
         if (textUI.activeSelf)
         {
             timeStart -= Time.deltaTime;
             if (timeStart <= 0)
             {
                 textUI.SetActive(false);
+                timeStart = 5;
+            }
+        }
+        if (textUIComeBack.activeSelf)
+        {
+            timeStart -= Time.deltaTime;
+            if (timeStart <= 0)
+            {
+                textUIComeBack.SetActive(false);
+                timeStart = 5;
             }
         }
     }

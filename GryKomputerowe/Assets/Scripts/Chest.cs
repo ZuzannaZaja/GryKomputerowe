@@ -57,6 +57,7 @@ public class Chest : MonoBehaviour
             if (timeStart <= 0)
             {
                 textUI.SetActive(false);
+                timeStart = 5;
             }
         }
     }

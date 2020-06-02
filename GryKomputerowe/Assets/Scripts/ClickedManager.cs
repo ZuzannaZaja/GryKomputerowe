@@ -17,6 +17,25 @@ public class ClickedManager : MonoBehaviour
 
     void Update()
     {
+        ManageOrder();
+        Resert();
+    }
+
+    public void Resert()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            input_order = new int[] { 0, 0, 0, 0, 0 };
+            counter = 0;
+            for (int i = 0; i < 12; i++)
+            {
+                player.letters[i].GetComponent<MeshRenderer>().material.color = Color.white;
+            }
+        }
+    }
+
+    public void ManageOrder()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
