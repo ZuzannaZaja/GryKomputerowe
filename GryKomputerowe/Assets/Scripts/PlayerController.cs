@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     Inventory inventory;
     public GameObject dotCursor;
     public GameObject handCursor;
+    public GameObject textReset;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +124,7 @@ public class PlayerController : MonoBehaviour
                         letter.SetActive(true);
                     }
                     inventory.Remove(item);
+                    textReset.SetActive(true);
                     break;
                 }
             }
