@@ -10,6 +10,7 @@ public class ClickedManager : MonoBehaviour
     public GameObject door;
     public PlayerController player;
     public GameObject textReset;
+    public AudioSource audioSource;
 
     private int counter = 0;
     // Update is called once per frame
@@ -58,6 +59,7 @@ public class ClickedManager : MonoBehaviour
                         player.letters[5].GetComponent<MeshRenderer>().material.color = Color.green;
 
                         textReset.SetActive(false);
+                        audioSource.Play();
                         door.transform.localEulerAngles = new Vector3(door.transform.localEulerAngles.x, door.transform.localEulerAngles.y + 90f, door.transform.localEulerAngles.z);
                         counter = 0;
                         input_order = new int[] { 0, 0, 0, 0, 0 };

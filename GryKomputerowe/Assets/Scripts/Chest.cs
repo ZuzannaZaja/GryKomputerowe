@@ -11,11 +11,13 @@ public class Chest : MonoBehaviour
     
     public GameObject textUI;          //text to be displayed when no key in inventory
     public float timeStart = 5;        // time after which the text will disappear
+    public AudioSource audioSource;
     
     // Start is called before the first frame update
     void Start()
     {
         inventory = Inventory.instance;
+        //audioSource = GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,6 +40,7 @@ public class Chest : MonoBehaviour
                             chestOpened.SetActive(true);
                             gameObject.SetActive(false);
                             inventory.Remove(item);
+                            audioSource.Play();
                             break;
                         }
                     }

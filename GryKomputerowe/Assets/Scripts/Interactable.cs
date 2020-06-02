@@ -7,7 +7,12 @@ public class Interactable : MonoBehaviour
     public Item item;
     public float radius = 3f;
     public Transform player;
+    private AudioSource audioSource;
 
+    private void Start()
+    {
+        audioSource = FindObjectOfType<AudioManager>().GetComponent<AudioSource>();
+    }
     public void ifInteract()
     {
         float distance = Vector3.Distance(player.position, transform.position);
@@ -18,6 +23,7 @@ public class Interactable : MonoBehaviour
     }
     void PickUp()
     {
+        audioSource.Play();
         Destroy(gameObject);
         Inventory.instance.Add(item);
     }

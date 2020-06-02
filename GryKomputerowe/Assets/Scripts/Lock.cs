@@ -21,6 +21,10 @@ public class Lock : MonoBehaviour
     public GameObject input;
     private bool wasCorrect;
     public GameObject door;
+    private AudioSource audioSource;
+    public AudioSource clickSource;
+    public AudioSource correctSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +36,7 @@ public class Lock : MonoBehaviour
         rend = GetComponent<Renderer>();
         numbers = transform.GetComponentsInChildren<Number>();
         wasCorrect = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -46,6 +51,7 @@ public class Lock : MonoBehaviour
             {
                 if (hit.collider.transform.GetComponent<Number>() != null && Input.GetMouseButtonDown(0) && isViewed)
                 {
+                    clickSource.Play();
                     if (!wasCorrect)
                     {
                         if (!thirdNumber && secondNumber && firstNumber)
@@ -92,6 +98,7 @@ public class Lock : MonoBehaviour
                     }
                     if (wasCorrect)
                     {
+                        audioSource.Play();
                         door.GetComponent<Door>().OpenDoor();
                     }
                 }
@@ -132,6 +139,7 @@ public class Lock : MonoBehaviour
         if (displayText.Equals("392"))
         {
             input.transform.GetComponent<TextMesh>().color = Color.green;
+            correctSource.Play();
             wasCorrect = true;
         }
         else

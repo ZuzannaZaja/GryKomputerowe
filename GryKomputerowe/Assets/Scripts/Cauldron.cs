@@ -12,6 +12,7 @@ public class Cauldron : MonoBehaviour
     public GameObject textUIComeBack;
     public float timeStart = 5;
     public GameObject chestOpened;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +76,7 @@ public class Cauldron : MonoBehaviour
                             {
                                 inventory.Remove(inventory.items[0]);
                             }
+                            audioSource.Play(); 
                             inventory.Add(potion);
                             ActivateText();
                             ingredients = 0;

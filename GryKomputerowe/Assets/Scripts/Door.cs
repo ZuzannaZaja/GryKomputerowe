@@ -9,10 +9,14 @@ public class Door : MonoBehaviour
     private Vector3 openedDoor;
     private Vector3 closedDoor;
     private bool wasOpened;
+    public AudioSource audioSource;
+    private bool shouldPlay;
 
     private void Start()
     {
         shouldChangeRotation = false;
+        wasOpened = false;
+        shouldPlay = true;
         openedDoor = new Vector3(-90f, 0f, 0f);
         closedDoor = new Vector3(-90f, 90f, 0f);
 
@@ -28,7 +32,7 @@ public class Door : MonoBehaviour
 
             if (shouldChangeRotation)
             {
-                transform.localEulerAngles = closedDoor;
+                CloseDoor();
                 shouldChangeRotation = false;
             }
         }
@@ -38,5 +42,15 @@ public class Door : MonoBehaviour
     {
         transform.localEulerAngles = openedDoor;
         wasOpened = true;
+    }
+
+    void CloseDoor()
+    {
+        transform.localEulerAngles = closedDoor;
+        if(!audioSource.isPlaying && shouldPlay)
+        {
+            audioSource.Play();
+            shouldPlay = false;
+        }
     }
 }
