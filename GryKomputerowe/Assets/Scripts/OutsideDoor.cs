@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class OutsideDoor : MonoBehaviour
 {
-    public Transform player;
+    public GameObject player;
+    private bool shouldCheck = false;
+    private Vector3 startingCamera;
+    private bool shouldStop = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +17,7 @@ public class OutsideDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(player.position, transform.position);
+        float distance = Vector3.Distance(player.transform.position, transform.position);
 
         if (distance <= 3f)
         {
@@ -25,14 +28,28 @@ public class OutsideDoor : MonoBehaviour
                 if (hit.collider.GetComponent<OutsideDoor>() != null && Input.GetMouseButtonDown(0))
                 {
                     transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 30f, transform.localEulerAngles.z);
+                    shouldCheck = true;
                 }
             }
         }
-        if(transform.localEulerAngles.y == 30f)
+        if(shouldCheck)
         {
-            if(player.position.x >= 17)
+            if(player.transform.position.x >= transform.position.x + 1)
             {
-                //TODO
+                startingCamera = Camera.main.transform.localEulerAngles;
+                Camera.main.GetComponent<RotateView>().isFocused = true;
+                Camera.main.GetComponent<RotateView>().isScrollOpened = true;
+                Vector3 to = new Vector3(-10, 0, 0);
+
+                if (!shouldStop)
+                {
+                    Camera.main.transform.eulerAngles = Vector3.Lerp(Camera.main.transform.rotation.eulerAngles, new Vector3(-10f,Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z), Time.deltaTime);
+
+                }
+                if (Camera.main.transform.eulerAngles.x >= 350f)
+                {
+                    shouldStop = true;
+                }
             }
         }
     }
