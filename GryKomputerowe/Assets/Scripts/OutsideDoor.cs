@@ -8,6 +8,8 @@ public class OutsideDoor : MonoBehaviour
     private bool shouldCheck = false;
     private Vector3 startingCamera;
     private bool shouldStop = false;
+    public CanvasGroup endingCanvas;
+    public GameObject inventoryCanvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,8 +51,21 @@ public class OutsideDoor : MonoBehaviour
                 if (Camera.main.transform.eulerAngles.x >= 350f)
                 {
                     shouldStop = true;
+                    StartCoroutine(Fade());
                 }
             }
         }
     }
+    IEnumerator Fade()
+    {
+        yield return new WaitForSeconds(1.5f); 
+        inventoryCanvas.SetActive(false);
+        endingCanvas.alpha = endingCanvas.alpha + Time.deltaTime;
+        if (endingCanvas.alpha >= 1f)
+        {
+            endingCanvas.alpha = 1f;
+        }
+    }
+    
+
 }
