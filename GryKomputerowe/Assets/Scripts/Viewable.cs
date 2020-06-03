@@ -23,6 +23,7 @@ public class Viewable : MonoBehaviour
     {
         startingPosition = transform.position;
         startingRotation = transform.rotation;
+        transform.localEulerAngles = new Vector3(-90f, 0f, 0f);
         transform.position += Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane + 0.5f))-rend.bounds.center;
         isSelected = true;
         if(isHint)

@@ -21,6 +21,13 @@ public class PlayerController : MonoBehaviour
     public GameObject textDrink;
     public GameObject bag;
 
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+    public float jumpHeight = 1f;
+
+    bool isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,14 +45,27 @@ public class PlayerController : MonoBehaviour
 
             Vector3 move = transform.right * x + transform.forward * z;
             characterController.Move(move * speed * Time.deltaTime);
-            velocity.y += gravity * Time.deltaTime;
-            characterController.Move(velocity * Time.deltaTime);
 
         }
     }
     // Update is called once per frame
     void Update()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        if(isGrounded && velocity.y < 0)
+        {
+            velocity.y = -1f;
+        }
+
+        if(Input.GetButtonDown("Jump") && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, 100))
@@ -53,36 +73,20 @@ public class PlayerController : MonoBehaviour
             Viewable viewable = hit.collider.GetComponent<Viewable>();
             Interactable interactable = hit.collider.GetComponent<Interactable>();
 
-            if (bag.GetComponent<Bag>().isHit)
+            if (hit.collider.GetComponent<CursorChange>() != null)
             {
-                dotCursor.SetActive(false);
-                handCursor.SetActive(true);
-            }
-
-            if (viewable != null)
-            {
-                float distanceViewable = Vector3.Distance(transform.position, viewable.transform.position);
-                if(distanceViewable <= 3f)
+                float distance = Vector3.Distance(transform.position, hit.collider.GetComponent<CursorChange>().transform.position);
+                if(distance <= 3f)
                 {
                     dotCursor.SetActive(false);
                     handCursor.SetActive(true);
                 }
             }
 
-            if (interactable != null)
+            if (hit.collider.GetComponent<CursorChange>() == null)
             {
-                float distanceInteractable = Vector3.Distance(transform.position, interactable.transform.position);
-                if (distanceInteractable <= interactable.radius)
-                {
-                    dotCursor.SetActive(false);
-                    handCursor.SetActive(true);
-                }
-            }
-
-            if (viewable == null && interactable == null && !bag.GetComponent<Bag>().isHit)
-            {
-                handCursor.SetActive(false);
                 dotCursor.SetActive(true);
+                handCursor.SetActive(false);
             }
 
             if (Input.GetMouseButtonDown(0) && viewable != null){

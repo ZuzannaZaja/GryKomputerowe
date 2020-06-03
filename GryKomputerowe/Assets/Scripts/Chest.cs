@@ -10,9 +10,10 @@ public class Chest : MonoBehaviour
     public Transform player;
     
     public GameObject textUI;          //text to be displayed when no key in inventory
-    public float timeStart = 5;        // time after which the text will disappear
+    public float timeStart = 2;        // time after which the text will disappear
     public AudioSource audioSource;
-    
+    public AudioSource lockedSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +61,7 @@ public class Chest : MonoBehaviour
             if (timeStart <= 0)
             {
                 textUI.SetActive(false);
-                timeStart = 5;
+                timeStart = 2;
             }
         }
     }
@@ -68,6 +69,7 @@ public class Chest : MonoBehaviour
     public void ActivateText()
     {
         textUI.SetActive(true);
+        lockedSource.Play();
     }
     
 }
