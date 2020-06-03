@@ -20,11 +20,14 @@ public class PlayerController : MonoBehaviour
     public GameObject textReset;
     public GameObject textDrink;
     public GameObject bag;
+    public GameObject pauseCanvas;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public float jumpHeight = 1f;
+
+    private bool isPaused = false;
 
     bool isGrounded;
 
@@ -146,10 +149,35 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GetComponent<SceneSwitcher>().BackMenu();
+            if (isPaused)
+            {
+                Time.timeScale = 1.0f;
+                pauseCanvas.SetActive(false);
+                dotCursor.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                isPaused = false;
+            }
+            else
+            {
+                Time.timeScale = 0.0f;
+                pauseCanvas.SetActive(true);
+                dotCursor.SetActive(false);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                isPaused = true;
+            }
         }
     }
-
+    public void Resume()
+    {
+        Time.timeScale = 1.0f;
+        pauseCanvas.SetActive(false);
+        dotCursor.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isPaused = false;
+    }
 }
 
 

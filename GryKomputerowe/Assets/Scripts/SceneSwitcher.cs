@@ -18,7 +18,6 @@ public class SceneSwitcher : MonoBehaviour
         SceneManager.LoadScene("Start");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
     }
 }
 
