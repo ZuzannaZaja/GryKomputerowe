@@ -7,6 +7,7 @@ public class SceneSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene("Main");
         Cursor.visible = false;
+        Time.timeScale = 1.0f;
     }
     public void QuitGame()
     {

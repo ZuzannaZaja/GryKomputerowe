@@ -40,6 +40,7 @@ public class FinalDoor : MonoBehaviour
                             shouldPlay = false;
                             jail.SetActive(false);
                             inventory.Remove(inventory.items[i]);
+                            GetComponent<AudioSource>().Play();
                             transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + angle, transform.localEulerAngles.z);
                             secondHalf.transform.localEulerAngles = new Vector3(secondHalf.transform.localEulerAngles.x, secondHalf.transform.localEulerAngles.y - angle, secondHalf.transform.localEulerAngles.z);
 
