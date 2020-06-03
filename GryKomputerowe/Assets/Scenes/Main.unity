@@ -4484,6 +4484,7 @@ GameObject:
   - component: {fileID: 218031107}
   - component: {fileID: 218031108}
   - component: {fileID: 218031109}
+  - component: {fileID: 218031110}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4638,6 +4639,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+--- !u!114 &218031110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218031102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0185fa6eba306554d8b9375bd9163042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &223709292 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3629098907630726840, guid: afc3fedc78427f04097996d062288c66,
@@ -5483,6 +5496,19 @@ MonoBehaviour:
   player: {fileID: 218031102}
   endingCanvas: {fileID: 911360879}
   inventoryCanvas: {fileID: 1216822835}
+  dotCanvas: {fileID: 829592137}
+--- !u!114 &303348654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303348652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6b6c9c7fb90744eb388aac7b8acb24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &303348656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9074594807982636234, guid: 15745f8b70e5d524183539fa272d90a3,

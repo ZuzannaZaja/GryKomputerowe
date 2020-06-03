@@ -143,6 +143,11 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GetComponent<SceneSwitcher>().BackMenu();
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OutsideDoor : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class OutsideDoor : MonoBehaviour
     private bool shouldStop = false;
     public CanvasGroup endingCanvas;
     public GameObject inventoryCanvas;
+    public GameObject dotCanvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,19 +38,32 @@ public class OutsideDoor : MonoBehaviour
         }
         if(shouldCheck)
         {
-            if(player.transform.position.x >= transform.position.x + 1)
+            if(player.transform.position.x >= transform.position.x + 0.5f)
             {
                 startingCamera = Camera.main.transform.localEulerAngles;
                 Camera.main.GetComponent<RotateView>().isFocused = true;
                 Camera.main.GetComponent<RotateView>().isScrollOpened = true;
                 Vector3 to = new Vector3(-10, 0, 0);
 
-                if (!shouldStop)
+                if(Camera.main.transform.eulerAngles.x >= 180f)
                 {
-                    Camera.main.transform.eulerAngles = Vector3.Lerp(Camera.main.transform.rotation.eulerAngles, new Vector3(-10f,Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z), Time.deltaTime);
+                    if (!shouldStop)
+                    {
+                        Camera.main.transform.rotation = Quaternion.RotateTowards(Camera.main.transform.rotation, Quaternion.Euler(-6f, 90f, Camera.main.transform.eulerAngles.z), 10*Time.deltaTime);
+                    }
 
                 }
-                if (Camera.main.transform.eulerAngles.x >= 350f)
+
+                if(Camera.main.transform.eulerAngles.x >= 0f && Camera.main.transform.eulerAngles.x < 180f)
+                {
+                    if (!shouldStop)
+                    {
+                        Camera.main.transform.eulerAngles = Vector3.Lerp(Camera.main.transform.rotation.eulerAngles, new Vector3(-6f, 90f, Camera.main.transform.eulerAngles.z), Time.deltaTime);
+
+                    }
+
+                }
+                if(Camera.main.transform.eulerAngles.x == 354f)
                 {
                     shouldStop = true;
                     StartCoroutine(Fade());
@@ -58,13 +73,16 @@ public class OutsideDoor : MonoBehaviour
     }
     IEnumerator Fade()
     {
-        yield return new WaitForSeconds(1.5f); 
         inventoryCanvas.SetActive(false);
+        dotCanvas.SetActive(false);
+        yield return new WaitForSeconds(1.5f); 
         endingCanvas.alpha = endingCanvas.alpha + Time.deltaTime;
         if (endingCanvas.alpha >= 1f)
         {
             endingCanvas.alpha = 1f;
         }
+        yield return new WaitForSeconds(1f);
+        player.GetComponent<SceneSwitcher>().BackMenu();
     }
     
 

@@ -15,7 +15,9 @@ public class SceneSwitcher : MonoBehaviour
     }
     public void BackMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Start");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
     }
 }
