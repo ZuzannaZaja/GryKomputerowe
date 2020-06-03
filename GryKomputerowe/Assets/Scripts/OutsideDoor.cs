@@ -24,8 +24,15 @@ public class OutsideDoor : MonoBehaviour
             {
                 if (hit.collider.GetComponent<OutsideDoor>() != null && Input.GetMouseButtonDown(0))
                 {
-                    transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + 90f, transform.localEulerAngles.z);
+                    transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 30f, transform.localEulerAngles.z);
                 }
+            }
+        }
+        if(transform.localEulerAngles.y == 30f)
+        {
+            if(player.position.x >= 17)
+            {
+                //TODO
             }
         }
     }

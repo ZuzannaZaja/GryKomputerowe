@@ -10,6 +10,7 @@ public class FinalDoor : MonoBehaviour
     public GameObject secondHalf;
     private bool shouldPlay;
     private AudioSource audioSource;
+    public GameObject jail;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +38,7 @@ public class FinalDoor : MonoBehaviour
                         if (inventory.items[i].name.Equals("Golden Key"))
                         {
                             shouldPlay = false;
+                            jail.SetActive(false);
                             inventory.Remove(inventory.items[i]);
                             transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + angle, transform.localEulerAngles.z);
                             secondHalf.transform.localEulerAngles = new Vector3(secondHalf.transform.localEulerAngles.x, secondHalf.transform.localEulerAngles.y - angle, secondHalf.transform.localEulerAngles.z);
