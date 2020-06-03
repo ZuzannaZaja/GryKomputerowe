@@ -21,14 +21,13 @@ public class PlayerController : MonoBehaviour
     public GameObject textDrink;
     public GameObject bag;
     public GameObject pauseCanvas;
-
+    public Lock padlock;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public float jumpHeight = 1f;
 
-    private bool isPaused = false;
-
+    bool isPaused;
     bool isGrounded;
 
     // Start is called before the first frame update
@@ -86,7 +85,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (hit.collider.GetComponent<CursorChange>() == null)
+            if (hit.collider.GetComponent<CursorChange>() == null || rotateView.isFocused)
             {
                 dotCursor.SetActive(true);
                 handCursor.SetActive(false);
