@@ -24,6 +24,7 @@ public class Lock : MonoBehaviour
     private AudioSource audioSource;
     public AudioSource clickSource;
     public AudioSource correctSource;
+    public bool shouldHandDisappear;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class Lock : MonoBehaviour
         numbers = transform.GetComponentsInChildren<Number>();
         wasCorrect = false;
         audioSource = GetComponent<AudioSource>();
+        shouldHandDisappear = false;
     }
 
     // Update is called once per frame
@@ -85,10 +87,12 @@ public class Lock : MonoBehaviour
                 }
                 if (hit.collider.GetComponent<Lock>() == null && Input.GetMouseButtonDown(0) && isViewed && hit.collider.GetComponent<Number>() == null)
                 {
+                    GetComponent<Collider>().enabled = true;
                     transform.position = startingPosition;
                     transform.rotation = startingRotation;
                     transform.localScale = startingLocalScale;
                     rotateView.isScrollOpened = false;
+                    rotateView.isFocused = false;
                     isViewed = false;
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
@@ -102,10 +106,12 @@ public class Lock : MonoBehaviour
                         door.GetComponent<Door>().OpenDoor();
                     }
                 }
-                if (hit.collider.GetComponent<Lock>() != null || hit.collider.GetComponent<Number>() != null)
+                if (hit.collider.GetComponent<Lock>() != null | hit.collider.GetComponent<Number>() != null)
                 {
                     if (Input.GetMouseButtonDown(0) && !isViewed)
                     {
+                        GetComponent<Collider>().enabled = false;
+                        shouldHandDisappear = true;
                         startingLocalScale = transform.localScale;
                         startingPosition = transform.position;
                         startingRotation = transform.rotation;
@@ -115,6 +121,7 @@ public class Lock : MonoBehaviour
                         transform.position += Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane + 0.5f)) - rend.bounds.center;
                         transform.localScale *= 4f;
                         rotateView.isScrollOpened = true;
+                        rotateView.isFocused = true;
                         isViewed = true;
                     }
                 }

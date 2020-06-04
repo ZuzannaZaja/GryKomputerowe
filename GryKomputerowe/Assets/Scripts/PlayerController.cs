@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
@@ -20,12 +21,15 @@ public class PlayerController : MonoBehaviour
     public GameObject textReset;
     public GameObject textDrink;
     public GameObject bag;
-
+    public GameObject pauseCanvas;
+    public Lock padlock;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public float jumpHeight = 1f;
+    public GameObject PPV;
 
+    bool isPaused;
     bool isGrounded;
 
     // Start is called before the first frame update
@@ -83,10 +87,18 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (hit.collider.GetComponent<CursorChange>() == null)
+            if (hit.collider.GetComponent<CursorChange>() == null || rotateView.isFocused)
             {
-                dotCursor.SetActive(true);
-                handCursor.SetActive(false);
+                if(hit.collider.GetComponent<Interactable>() != null)
+                {
+                    dotCursor.SetActive(false);
+                    handCursor.SetActive(true);
+                }
+                else
+                {
+                    dotCursor.SetActive(true);
+                    handCursor.SetActive(false);
+                }
             }
 
             if (Input.GetMouseButtonDown(0) && viewable != null){
@@ -131,6 +143,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(item.name.Equals("Potion"))
                 {
+                    PPV.SetActive(true);
                     foreach (GameObject letter in letters)
                     {
                         letter.SetActive(true);
@@ -146,10 +159,35 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GetComponent<SceneSwitcher>().BackMenu();
+            if (isPaused)
+            {
+                Time.timeScale = 1.0f;
+                pauseCanvas.SetActive(false);
+                dotCursor.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                isPaused = false;
+            }
+            else
+            {
+                Time.timeScale = 0.0f;
+                pauseCanvas.SetActive(true);
+                dotCursor.SetActive(false);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                isPaused = true;
+            }
         }
     }
-
+    public void Resume()
+    {
+        Time.timeScale = 1.0f;
+        pauseCanvas.SetActive(false);
+        dotCursor.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isPaused = false;
+    }
 }
 
 

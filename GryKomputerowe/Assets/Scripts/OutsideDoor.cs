@@ -31,6 +31,7 @@ public class OutsideDoor : MonoBehaviour
             {
                 if (hit.collider.GetComponent<OutsideDoor>() != null && Input.GetMouseButtonDown(0))
                 {
+                    GetComponent<AudioSource>().Play();
                     transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 30f, transform.localEulerAngles.z);
                     shouldCheck = true;
                 }
@@ -75,13 +76,13 @@ public class OutsideDoor : MonoBehaviour
     {
         inventoryCanvas.SetActive(false);
         dotCanvas.SetActive(false);
-        yield return new WaitForSeconds(1.5f); 
+        yield return new WaitForSeconds(2f); 
         endingCanvas.alpha = endingCanvas.alpha + Time.deltaTime;
         if (endingCanvas.alpha >= 1f)
         {
             endingCanvas.alpha = 1f;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         player.GetComponent<SceneSwitcher>().BackMenu();
     }
     
