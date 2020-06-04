@@ -13,7 +13,9 @@ public class FinalDoor : MonoBehaviour
     public GameObject jail;
     public GameObject textDoorClosed;
     public float timeStart = 3;
-    
+
+    public AudioSource backgroundMusic;
+    public AudioSource windSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,9 @@ public class FinalDoor : MonoBehaviour
                             GetComponent<AudioSource>().Play();
                             transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + angle, transform.localEulerAngles.z);
                             secondHalf.transform.localEulerAngles = new Vector3(secondHalf.transform.localEulerAngles.x, secondHalf.transform.localEulerAngles.y - angle, secondHalf.transform.localEulerAngles.z);
+                            backgroundMusic.Stop();
+                            windSound.Play();
+
 
                         }
                     }

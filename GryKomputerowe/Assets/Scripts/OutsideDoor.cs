@@ -12,6 +12,7 @@ public class OutsideDoor : MonoBehaviour
     public CanvasGroup endingCanvas;
     public GameObject inventoryCanvas;
     public GameObject dotCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
