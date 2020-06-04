@@ -7,6 +7,9 @@ public class UpstairsDoor : MonoBehaviour
     private Vector3 startingRotation;
     public Transform player;
     public AudioSource lockedSource;
+    public GameObject textDoorClosed;
+    public float timeStart = 2;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +29,18 @@ public class UpstairsDoor : MonoBehaviour
                 if (hit.collider.transform.GetComponent<UpstairsDoor>() != null && Input.GetMouseButtonDown(0))
                 {
                     lockedSource.Play();
+                    textDoorClosed.SetActive(true);
                 }
+            }
+        }
+        
+        if (textDoorClosed.activeSelf)
+        {
+            timeStart -= Time.deltaTime;
+            if (timeStart <= 0)
+            {
+                textDoorClosed.SetActive(false);
+                timeStart = 2;
             }
         }
 

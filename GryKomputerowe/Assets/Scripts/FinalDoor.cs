@@ -11,6 +11,9 @@ public class FinalDoor : MonoBehaviour
     private bool shouldPlay;
     private AudioSource audioSource;
     public GameObject jail;
+    public GameObject textDoorClosed;
+    public float timeStart = 3;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +36,14 @@ public class FinalDoor : MonoBehaviour
                 if (hit.collider.GetComponent<FinalDoor>() != null && Input.GetMouseButtonDown(0))
                 {
                     shouldPlay = true;
+                    textDoorClosed.SetActive(true);
                     for (int i = 0; i < inventory.items.Count; i++)
                     {
                         if (inventory.items[i].name.Equals("Golden Key"))
                         {
                             shouldPlay = false;
                             jail.SetActive(false);
+                            textDoorClosed.SetActive(false);
                             inventory.Remove(inventory.items[i]);
                             GetComponent<AudioSource>().Play();
                             transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y + angle, transform.localEulerAngles.z);
@@ -54,6 +59,16 @@ public class FinalDoor : MonoBehaviour
         {
             audioSource.Play();
             shouldPlay = false;
+        }
+        
+        if (textDoorClosed.activeSelf)
+        {
+            timeStart -= Time.deltaTime;
+            if (timeStart <= 0)
+            {
+                textDoorClosed.SetActive(false);
+                timeStart = 3;
+            }
         }
     }
 }
