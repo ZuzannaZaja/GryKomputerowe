@@ -32,6 +32,7 @@ public class Viewable : MonoBehaviour
             transform.localScale *= hintScale;
             transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward, Camera.main.transform.up);
             rotateView.isScrollOpened = true;
+            GetComponent<Collider>().enabled = false;
         }
     }
 
@@ -44,6 +45,7 @@ public class Viewable : MonoBehaviour
         {
             transform.localScale = localScaleHint;
             rotateView.isScrollOpened = false;
+            GetComponent<Collider>().enabled = true;
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     public float jumpHeight = 1f;
+    public GameObject PPV;
 
     bool isPaused;
     bool isGrounded;
@@ -87,8 +89,16 @@ public class PlayerController : MonoBehaviour
 
             if (hit.collider.GetComponent<CursorChange>() == null || rotateView.isFocused)
             {
-                dotCursor.SetActive(true);
-                handCursor.SetActive(false);
+                if(hit.collider.GetComponent<Interactable>() != null)
+                {
+                    dotCursor.SetActive(false);
+                    handCursor.SetActive(true);
+                }
+                else
+                {
+                    dotCursor.SetActive(true);
+                    handCursor.SetActive(false);
+                }
             }
 
             if (Input.GetMouseButtonDown(0) && viewable != null){
@@ -133,6 +143,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(item.name.Equals("Potion"))
                 {
+                    PPV.SetActive(true);
                     foreach (GameObject letter in letters)
                     {
                         letter.SetActive(true);

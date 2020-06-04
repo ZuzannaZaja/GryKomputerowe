@@ -11,6 +11,7 @@ public class ClickedManager : MonoBehaviour
     public PlayerController player;
     public GameObject textReset;
     public AudioSource audioSource;
+    public GameObject PPV;
 
     private int counter = 0;
     // Update is called once per frame
@@ -57,7 +58,7 @@ public class ClickedManager : MonoBehaviour
                         player.letters[7].GetComponent<MeshRenderer>().material.color = Color.green;
                         player.letters[10].GetComponent<MeshRenderer>().material.color = Color.green;
                         player.letters[5].GetComponent<MeshRenderer>().material.color = Color.green;
-
+                        PPV.SetActive(false);
                         textReset.SetActive(false);
                         audioSource.Play();
                         door.transform.localEulerAngles = new Vector3(door.transform.localEulerAngles.x, door.transform.localEulerAngles.y + 90f, door.transform.localEulerAngles.z);

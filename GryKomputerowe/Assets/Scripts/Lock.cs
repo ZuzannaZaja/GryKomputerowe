@@ -87,6 +87,7 @@ public class Lock : MonoBehaviour
                 }
                 if (hit.collider.GetComponent<Lock>() == null && Input.GetMouseButtonDown(0) && isViewed && hit.collider.GetComponent<Number>() == null)
                 {
+                    GetComponent<Collider>().enabled = true;
                     transform.position = startingPosition;
                     transform.rotation = startingRotation;
                     transform.localScale = startingLocalScale;
@@ -105,10 +106,11 @@ public class Lock : MonoBehaviour
                         door.GetComponent<Door>().OpenDoor();
                     }
                 }
-                if (hit.collider.GetComponent<Lock>() != null || hit.collider.GetComponent<Number>() != null)
+                if (hit.collider.GetComponent<Lock>() != null | hit.collider.GetComponent<Number>() != null)
                 {
                     if (Input.GetMouseButtonDown(0) && !isViewed)
                     {
+                        GetComponent<Collider>().enabled = false;
                         shouldHandDisappear = true;
                         startingLocalScale = transform.localScale;
                         startingPosition = transform.position;
